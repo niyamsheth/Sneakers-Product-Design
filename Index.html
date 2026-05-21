@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ATMOZ — Built For Movement</title>
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <!-- GSAP + ScrollTrigger + SplitText CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+</head>
+<body>
+
+  <!-- ░░ CUSTOM CURSOR ░░ -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-trail" id="cursorTrail"></div>
+
+  <!-- ░░ NOISE OVERLAY ░░ -->
+  <canvas id="noiseCanvas" class="noise-overlay"></canvas>
+
+  <!-- ========================================================
+       NAVBAR
+  ======================================================== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo">ATMOZ</div>
+    <ul class="nav-links">
+      <li><a href="#collection">Collection</a></li>
+      <li><a href="#technology">Technology</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="nav-cart" aria-label="Cart">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <span class="cart-count">0</span>
+      </button>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="#collection" class="mm-link">Collection</a></li>
+      <li><a href="#technology" class="mm-link">Technology</a></li>
+      <li><a href="#reviews" class="mm-link">Reviews</a></li>
+      <li><a href="#contact" class="mm-link">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- ========================================================
+       HERO SECTION
+  ======================================================== -->
+  <section class="hero" id="hero">
+
+    <!-- Background glows -->
+    <div class="hero-glow glow-purple"></div>
+    <div class="hero-glow glow-orange"></div>
+
+    <!-- Floating lines -->
+    <div class="float-lines">
+      <div class="fl fl-1"></div>
+      <div class="fl fl-2"></div>
+      <div class="fl fl-3"></div>
+    </div>
+
+    <!-- Vertical micro text -->
+    <div class="vertical-text vt-left">COLLECTION 2025 — PERFORMANCE SERIES</div>
+    <div class="vertical-text vt-right">ATMOZ WORLDWIDE / EST. MMXXV</div>
+
+    <!-- Giant bg logo -->
+    <div class="hero-bg-text" aria-hidden="true">ATMOZ</div>
+
+    <!-- Center sneaker -->
+    <div class="hero-shoe-wrap" id="heroShoe">
+      <div class="shoe-glow"></div>
+      <div class="shoe-placeholder">
+        <!-- SVG sneaker silhouette -->
+        <svg class="sneaker-svg" viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="shoeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#1A0089;stop-opacity:1" />
+              <stop offset="50%" style="stop-color:#FE5E32;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#B8CE52;stop-opacity:1" />
+            </linearGradient>
+            <linearGradient id="soleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color:#1A0089" />
+              <stop offset="100%" style="stop-color:#FE5E32" />
+            </linearGradient>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="4" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <!-- Sole -->
+          <ellipse cx="300" cy="270" rx="240" ry="22" fill="url(#soleGrad)" opacity="0.9"/>
+          <!-- Upper body -->
+          <path d="M80 250 Q60 200 100 160 Q150 110 220 100 Q300 88 370 95 Q430 100 470 130 Q510 160 520 200 Q525 230 510 250 Z" fill="url(#shoeGrad)" filter="url(#glow)"/>
+          <!-- Midsole -->
+          <path d="M80 250 L510 250 Q525 260 520 270 L70 270 Q60 260 80 250Z" fill="#FFF3D6" opacity="0.85"/>
+          <!-- Toe box highlight -->
+          <path d="M100 160 Q140 130 200 125 Q170 150 160 180 Q130 185 100 160Z" fill="rgba(255,255,255,0.2)"/>
+          <!-- Laces -->
+          <line x1="220" y1="120" x2="230" y2="105" stroke="#FFF3D6" stroke-width="3" opacity="0.7"/>
+          <line x1="255" y1="108" x2="265" y2="95" stroke="#FFF3D6" stroke-width="3" opacity="0.7"/>
+          <line x1="290" y1="100" x2="300" y2="88" stroke="#FFF3D6" stroke-width="3" opacity="0.7"/>
+          <line x1="325" y1="96" x2="335" y2="85" stroke="#FFF3D6" stroke-width="3" opacity="0.7"/>
+          <!-- Accent stripe -->
+          <path d="M280 200 Q320 160 390 145 Q420 140 450 155 Q430 175 390 180 Q340 185 280 200Z" fill="#B8CE52" opacity="0.8"/>
+          <!-- ATMOZ heel text -->
+          <text x="440" y="235" font-family="Bebas Neue, sans-serif" font-size="20" fill="#FFF3D6" opacity="0.9" letter-spacing="3">ATMOZ</text>
+          <!-- Lace holes row -->
+          <circle cx="215" cy="130" r="4" fill="none" stroke="#FFF3D6" stroke-width="1.5" opacity="0.6"/>
+          <circle cx="252" cy="118" r="4" fill="none" stroke="#FFF3D6" stroke-width="1.5" opacity="0.6"/>
+          <circle cx="289" cy="110" r="4" fill="none" stroke="#FFF3D6" stroke-width="1.5" opacity="0.6"/>
+          <circle cx="326" cy="106" r="4" fill="none" stroke="#FFF3D6" stroke-width="1.5" opacity="0.6"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Hero copy -->
+    <div class="hero-content">
+      <div class="hero-tag">NEW ERA / SS25</div>
+      <h1 class="hero-headline">
+        <span class="hl-1" data-split>BUILT FOR</span>
+        <span class="hl-2" data-split>MOVEMENT.</span>
+      </h1>
+      <p class="hero-sub">Engineered at the intersection of sport science and street culture. No compromise. No retreat.</p>
+      <div class="hero-ctas">
+        <button class="btn-primary magnetic" data-text="Explore Collection">
+          <span>Explore Collection</span>
+          <div class="btn-bg"></div>
+        </button>
+        <button class="btn-ghost magnetic" data-text="Watch Campaign">
+          <span>▶ Watch Campaign</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="scroll-indicator">
+      <div class="scroll-line"></div>
+      <span>SCROLL</span>
+    </div>
+
+  </section>
+
+  <!-- ========================================================
+       MARQUEE
+  ======================================================== -->
+  <div class="marquee-wrap">
+    <div class="marquee-track" id="marquee1">
+      <span>NO LIMITS</span>
+      <span class="sep">—</span>
+      <span>BUILT TO MOVE</span>
+      <span class="sep">—</span>
+      <span>ATMOZ WORLDWIDE</span>
+      <span class="sep">—</span>
+      <span>PERFORMANCE MEETS CULTURE</span>
+      <span class="sep">—</span>
+      <span>NO LIMITS</span>
+      <span class="sep">—</span>
+      <span>BUILT TO MOVE</span>
+      <span class="sep">—</span>
+      <span>ATMOZ WORLDWIDE</span>
+      <span class="sep">—</span>
+      <span>PERFORMANCE MEETS CULTURE</span>
+      <span class="sep">—</span>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       COLLECTION SECTION
+  ======================================================== -->
+  <section class="collection" id="collection">
+    <div class="section-label">— 001 / COLLECTION</div>
+    <h2 class="section-title">
+      <em>The</em> Drop<br/>SS25
+    </h2>
+
+    <div class="collection-grid">
+
+      <!-- Card 1 -->
+      <article class="shoe-card card-left" data-index="01">
+        <div class="card-img-wrap">
+          <svg class="card-sneaker" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="cg1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#1A0089"/>
+                <stop offset="100%" style="stop-color:#B8CE52"/>
+              </linearGradient>
+            </defs>
+            <ellipse cx="200" cy="185" rx="160" ry="12" fill="#1A0089" opacity="0.6"/>
+            <path d="M50 165 Q40 135 70 110 Q105 80 155 72 Q210 62 255 68 Q305 75 330 105 Q350 125 348 155 Q346 170 330 172 Z" fill="url(#cg1)"/>
+            <path d="M50 165 L330 165 Q345 172 340 180 L45 180 Q35 172 50 165Z" fill="#FFF3D6" opacity="0.9"/>
+            <path d="M185 130 Q215 105 265 98 Q290 94 310 108 Q290 125 255 128 Q220 132 185 130Z" fill="#FE5E32" opacity="0.9"/>
+            <text x="280" y="152" font-family="Bebas Neue" font-size="14" fill="#FFF3D6" opacity="0.8" letter-spacing="2">ATMOZ</text>
+          </svg>
+        </div>
+        <div class="card-info">
+          <span class="card-num">01</span>
+          <h3>VORTEX X</h3>
+          <p>Neon velocity. Midnight grip.</p>
+          <a href="#" class="card-cta">Shop Now →</a>
+        </div>
+        <div class="card-glow"></div>
+      </article>
+
+      <!-- Card 2 — Hero center -->
+      <article class="shoe-card card-center" data-index="02">
+        <div class="card-badge">BESTSELLER</div>
+        <div class="card-img-wrap">
+          <svg class="card-sneaker" viewBox="0 0 500 250" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="cg2" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#FE5E32"/>
+                <stop offset="50%" style="stop-color:#1A0089"/>
+                <stop offset="100%" style="stop-color:#B8CE52"/>
+              </linearGradient>
+              <filter id="glow2">
+                <feGaussianBlur stdDeviation="6" result="blur"/>
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <ellipse cx="250" cy="232" rx="200" ry="14" fill="#FE5E32" opacity="0.4"/>
+            <path d="M60 210 Q45 165 90 130 Q140 88 200 78 Q270 65 325 74 Q385 83 415 120 Q440 150 438 190 Q436 212 415 215 Z" fill="url(#cg2)" filter="url(#glow2)"/>
+            <path d="M60 210 L415 210 Q432 220 425 230 L55 230 Q43 220 60 210Z" fill="#FFF3D6"/>
+            <path d="M225 165 Q265 130 335 120 Q370 115 400 132 Q375 155 330 160 Q280 165 225 165Z" fill="#B8CE52" opacity="0.9"/>
+            <text x="350" y="198" font-family="Bebas Neue" font-size="18" fill="#FFF3D6" opacity="0.9" letter-spacing="3">ATMOZ</text>
+          </svg>
+        </div>
+        <div class="card-info">
+          <span class="card-num">02</span>
+          <h3>NOVA CORE</h3>
+          <p>Our flagship. Reengineered for impact.</p>
+          <a href="#" class="card-cta">Shop Now →</a>
+        </div>
+        <div class="card-price">$249</div>
+        <div class="card-glow glow-orange-center"></div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="shoe-card card-right" data-index="03">
+        <div class="card-img-wrap">
+          <svg class="card-sneaker" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="cg3" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#B8CE52"/>
+                <stop offset="100%" style="stop-color:#FE5E32"/>
+              </linearGradient>
+            </defs>
+            <ellipse cx="200" cy="185" rx="160" ry="12" fill="#B8CE52" opacity="0.4"/>
+            <path d="M50 165 Q40 135 70 110 Q105 80 155 72 Q210 62 255 68 Q305 75 330 105 Q350 125 348 155 Q346 170 330 172 Z" fill="url(#cg3)"/>
+            <path d="M50 165 L330 165 Q345 172 340 180 L45 180 Q35 172 50 165Z" fill="#1A0089" opacity="0.9"/>
+            <path d="M185 130 Q215 105 265 98 Q290 94 310 108 Q290 125 255 128 Q220 132 185 130Z" fill="#1A0089" opacity="0.7"/>
+            <text x="270" y="152" font-family="Bebas Neue" font-size="14" fill="#FFF3D6" opacity="0.8" letter-spacing="2">ATMOZ</text>
+          </svg>
+        </div>
+        <div class="card-info">
+          <span class="card-num">03</span>
+          <h3>APEX LITE</h3>
+          <p>Featherweight. Full power.</p>
+          <a href="#" class="card-cta">Shop Now →</a>
+        </div>
+        <div class="card-glow glow-lime"></div>
+      </article>
+
+    </div>
+
+    <!-- Floating annotation -->
+    <div class="float-annotation">
+      <div class="ann-line"></div>
+      <span>RESPONSIVE CUSHION CORE™</span>
+    </div>
+
+  </section>
+
+  <!-- ========================================================
+       TECHNOLOGY STRIP
+  ======================================================== -->
+  <section class="technology" id="technology">
+    <div class="section-label">— 002 / TECHNOLOGY</div>
+    <h2 class="section-title tech-title">
+      Engineered<br/><em>Precision</em>
+    </h2>
+
+    <div class="tech-grid">
+
+      <div class="tech-item">
+        <div class="tech-icon">
+          <svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="none" stroke="var(--orange)" stroke-width="1.5" stroke-dasharray="4 2"/><path d="M12 20 Q20 10 28 20 Q20 30 12 20Z" fill="var(--orange)" opacity="0.6"/></svg>
+        </div>
+        <h4>LIGHTWEIGHT MESH</h4>
+        <p>Ultra-breathable 3D knit upper adapts to every stride.</p>
+      </div>
+
+      <div class="tech-item">
+        <div class="tech-icon">
+          <svg viewBox="0 0 40 40"><rect x="8" y="20" width="24" height="12" rx="6" fill="none" stroke="var(--lime)" stroke-width="1.5"/><path d="M14 20 Q20 8 26 20" fill="none" stroke="var(--lime)" stroke-width="1.5"/></svg>
+        </div>
+        <h4>ATMOS CUSHION</h4>
+        <p>Reactive foam returns 92% of impact energy on every step.</p>
+      </div>
+
+      <div class="tech-item">
+        <div class="tech-icon">
+          <svg viewBox="0 0 40 40"><path d="M10 30 L20 10 L30 30 Z" fill="none" stroke="var(--purple)" stroke-width="1.5"/><circle cx="20" cy="25" r="4" fill="var(--purple)" opacity="0.7"/></svg>
+        </div>
+        <h4>GRIP CONTROL</h4>
+        <p>Hexagonal rubber compound for multi-surface traction.</p>
+      </div>
+
+      <div class="tech-item">
+        <div class="tech-icon">
+          <svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="12" fill="none" stroke="var(--cream)" stroke-width="1.5"/><circle cx="20" cy="20" r="6" fill="none" stroke="var(--cream)" stroke-width="1.5"/><line x1="20" y1="8" x2="20" y2="14" stroke="var(--cream)" stroke-width="1.5"/><line x1="20" y1="26" x2="20" y2="32" stroke="var(--cream)" stroke-width="1.5"/></svg>
+        </div>
+        <h4>BREATHABLE CORE</h4>
+        <p>Micro-perforation system keeps your foot 40% cooler.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================
+       SECOND MARQUEE
+  ======================================================== -->
+  <div class="marquee-wrap marquee-reverse">
+    <div class="marquee-track" id="marquee2">
+      <span>DESIGN FOR IMPACT</span>
+      <span class="sep">✦</span>
+      <span>ZERO COMPROMISE</span>
+      <span class="sep">✦</span>
+      <span>ENGINEERED FOR THE FUTURE</span>
+      <span class="sep">✦</span>
+      <span>ATMOZ SS25</span>
+      <span class="sep">✦</span>
+      <span>DESIGN FOR IMPACT</span>
+      <span class="sep">✦</span>
+      <span>ZERO COMPROMISE</span>
+      <span class="sep">✦</span>
+      <span>ENGINEERED FOR THE FUTURE</span>
+      <span class="sep">✦</span>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       INTERACTIVE SECTION
+  ======================================================== -->
+  <section class="interactive-section" id="interactive">
+    <canvas id="gridCanvas"></canvas>
+    <div class="int-content">
+      <div class="section-label">— 003 / INNOVATION</div>
+      <h2 class="section-title int-title">
+        ENGINEERED<br/><em>FOR THE</em><br/>FUTURE
+      </h2>
+      <p class="int-sub">Move your cursor. Feel the response.</p>
+      <div class="int-stats">
+        <div class="stat"><span class="stat-num" data-target="92">0</span><span>%</span><p>Energy Return</p></div>
+        <div class="stat"><span class="stat-num" data-target="180">0</span><span>g</span><p>Total Weight</p></div>
+        <div class="stat"><span class="stat-num" data-target="48">0</span><span>hr</span><p>Field Tested</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       REVIEWS SECTION
+  ======================================================== -->
+  <section class="reviews" id="reviews">
+    <div class="section-label">— 004 / REVIEWS</div>
+    <h2 class="section-title">
+      What They<br/><em>Say</em>
+    </h2>
+
+    <div class="reviews-grid">
+
+      <div class="review-card rc-1">
+        <div class="rc-stars">★★★★★</div>
+        <blockquote>"These feel like wearing air. The NOVA CORE completely changed how I train. Nothing comes close."</blockquote>
+        <div class="rc-author">
+          <div class="rc-avatar" style="background: linear-gradient(135deg,#1A0089,#FE5E32)">MJ</div>
+          <div>
+            <strong>Marcus J.</strong>
+            <span>Pro Sprinter / Nike Rival</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card rc-2">
+        <div class="rc-stars">★★★★★</div>
+        <blockquote>"ATMOZ is what happens when a brand actually listens to athletes. The grip is insane, the fit is perfect."</blockquote>
+        <div class="rc-author">
+          <div class="rc-avatar" style="background: linear-gradient(135deg,#B8CE52,#1A0089)">SL</div>
+          <div>
+            <strong>Sofia L.</strong>
+            <span>Street Style Creator</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card rc-3">
+        <div class="rc-stars">★★★★★</div>
+        <blockquote>"I wore the APEX LITE for 6 months straight. Still feels fresh. Best investment in footwear I've made."</blockquote>
+        <div class="rc-author">
+          <div class="rc-avatar" style="background: linear-gradient(135deg,#FE5E32,#B8CE52)">DK</div>
+          <div>
+            <strong>Dev K.</strong>
+            <span>Creative Director</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Rotating bg graphic -->
+    <div class="review-rotate-bg" aria-hidden="true">ATMOZ</div>
+
+  </section>
+
+  <!-- ========================================================
+       CONTACT / FOOTER SECTION
+  ======================================================== -->
+  <section class="contact" id="contact">
+    <div class="contact-bg-text" aria-hidden="true">LET'S</div>
+
+    <div class="contact-inner">
+      <div class="contact-left">
+        <div class="section-label">— 005 / CONNECT</div>
+        <h2 class="contact-heading">
+          LET'S<br/><em>CONNECT</em>
+        </h2>
+        <p class="contact-sub">Collabs. Press. Wholesale.<br/>We want to hear from you.</p>
+
+        <div class="social-links">
+          <a href="#" class="social-link" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="Twitter/X">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="TikTok">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.31 6.31 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.83a8.18 8.18 0 004.79 1.53V6.89a4.85 4.85 0 01-1.02-.2z"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="contact-right">
+        <div class="contact-form">
+          <div class="form-row">
+            <div class="form-field">
+              <input type="text" id="fname" placeholder=" " autocomplete="off"/>
+              <label for="fname">Your Name</label>
+              <div class="field-line"></div>
+            </div>
+            <div class="form-field">
+              <input type="email" id="femail" placeholder=" " autocomplete="off"/>
+              <label for="femail">Email Address</label>
+              <div class="field-line"></div>
+            </div>
+          </div>
+          <div class="form-field full">
+            <input type="text" id="fsubject" placeholder=" " autocomplete="off"/>
+            <label for="fsubject">Subject</label>
+            <div class="field-line"></div>
+          </div>
+          <div class="form-field full">
+            <textarea id="fmessage" rows="4" placeholder=" "></textarea>
+            <label for="fmessage">Message</label>
+            <div class="field-line"></div>
+          </div>
+          <button class="btn-submit magnetic" type="button">
+            <span>Send Message</span>
+            <div class="submit-arrow">→</div>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer bar -->
+    <div class="footer-bar">
+      <span class="footer-logo">ATMOZ</span>
+      <span class="footer-copy">© 2025 ATMOZ. All rights reserved.</span>
+      <span class="footer-right">BUILT FOR MOVEMENT</span>
+    </div>
+
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
